@@ -44,22 +44,6 @@ export default function Home() {
           />
         </div>
       ))}
-      
-      {/* {loading ? (
-        <p>Loading news...</p>
-      ) : articles.length > 0 ? (
-        articles.map((article, index) => (
-          <div key={index}>
-            <h2>{article.title}</h2>
-            <p>{article.description}</p>
-            <a href={article.url} target="_blank" rel="noopener noreferrer">
-              Read More
-            </a>
-          </div>
-        ))
-      ) : (
-        <p>No news available.</p>
-      )} */}
     </div>
   );
 }
