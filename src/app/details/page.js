@@ -1,5 +1,5 @@
 
-export default function page() {
+export default function details() {
   return (
     <div>
       <h1>i  am details page</h1>
