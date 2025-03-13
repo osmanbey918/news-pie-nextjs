@@ -34,7 +34,7 @@ export default function Home() {
     <div>
       <h1>Latest News</h1>
       {console.log(articles)};
-      {articles.map((article, index) => (
+      {/* {articles.map((article, index) => (
 
         <div key={index}>
           <h2>{article.title}</h2>
@@ -43,7 +43,14 @@ export default function Home() {
             href={article.url} target="_blank" rel="noopener noreferrer"
           />
         </div>
-      ))}
+      ))} */}
+      <div className="container">
+        <label htmlFor="email">Email:</label>
+        <input type="email" name="email" placeholder="email"/>
+        <label htmlFor="password">Password</label>
+        <input type="password" name="password" placeholder="password" />
+        <button type="submit">submit</button>
+      </div>
       <h1>why not</h1>
     </div>
   );
