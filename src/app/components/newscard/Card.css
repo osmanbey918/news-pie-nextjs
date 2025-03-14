@@ -1,0 +1,43 @@
+.card-container {
+    background-color: antiquewhite;
+    font-family: sans-serif;
+    border: 1px solid grey;
+    box-shadow: 2px 4px 8px grey;
+    margin-top: 1vw;
+    width: 320px;
+    overflow: hidden;
+    border-radius: 10px;
+
+}
+aside{
+    
+}
+.word {
+    position: relative;
+    top: -25px;
+    animation: ani 2s;
+    color: red;
+    transition: 1s ease-in;
+}
+.word1{
+    position: relative;
+    animation: ani 1s ease-in;
+    color: aqua;
+    transition: top 1s ease-in;
+}
+.word::after{
+    content: 'hjhfyu';
+    height: 5px;
+    width: 40px;
+    border: 2px solid red;
+    background-color: black;
+}
+@keyframes ani {
+    to {
+        top: -20px;
+    }
+
+    from {
+        top: auto;
+    }
+}
