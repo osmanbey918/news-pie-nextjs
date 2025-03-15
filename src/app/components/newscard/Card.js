@@ -3,12 +3,12 @@ import { useState } from 'react';
 import './Card.css'
 
 export default function Card({ article }) {
-    // const [word, setword] = useState("hello");
-    // const [ani, setani] = useState("word")
-    // setTimeout(() => {
-    //     setword(word == "hello" ? "i'am khan" : "hello")
-    //     setani(ani == "word" ? "word1" : "word")
-    // }, 2000);
+    const [word, setword] = useState("hello");
+    const [ani, setani] = useState("word")
+    setTimeout(() => {
+        setword(word == "hello" ? "i'am khan" : "hello")
+        setani(ani == "word" ? "word1" : "word")
+    }, 2000);
 
     return (
         <div>
