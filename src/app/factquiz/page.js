@@ -6,22 +6,22 @@ import quiz from '../components/data';
 export default function page() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    // const [quiz, setQuiz] = useState(null);
-    // const startQuiz = async () => {
-    //     try {
-    //         // const response = await axios.get('/api/factquiz');
-    //         // setQuiz(response.data.quiz.results);
-    //         // console.log(response.data.quiz.results);
-    //         setQuiz(quiz)
+    const [quiz, setQuiz] = useState(null);
+    const startQuiz = async () => {
+        try {
+            // const response = await axios.get('/api/factquiz');
+            // setQuiz(response.data.quiz.results);
+            // console.log(response.data.quiz.results);
+            setQuiz(quiz)
 
 
-    //         setLoading(false);
-    //     } catch (err) {
-    //         setError('Failed to start quiz');
-    //         setLoading(false);
-    //     }
-    // }
-    // setQuiz(quizd)444
+            setLoading(false);
+        } catch (err) {
+            setError('Failed to start quiz');
+            setLoading(false);
+        }
+    }
+    setQuiz(quiz)
 
     return (
         <div>
