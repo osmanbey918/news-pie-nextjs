@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import quizData from "../components/data"; // Ensure this file exists
-
+import "./style.css";
 export default function Page() {
     const [quiz, setQuiz] = useState([]);
     const [selectedAnswers, setSelectedAnswers] = useState({}); // Stores selected answers
@@ -46,20 +46,23 @@ export default function Page() {
                             key={i}
                             style={{
                                 border: selectedAnswers[questionIndex] === option
-                                    ? answerStatus[questionIndex] === "correct"
-                                        ? "2px solid green" // Green for correct
-                                        : "2px solid red"   // Red for incorrect
-                                    : "2px solid transparent", // No border if not selected
+                                ? answerStatus[questionIndex] === "correct"
+                                ? "2px solid green" // Green for correct
+                                : "2px solid red"   // Red for incorrect
+                                : "2px solid transparent", // No border if not selected
                                 padding: "5px",
                                 marginBottom: "5px",
                                 borderRadius: "5px",
-                            }}
+                            }
+                        }
                         >
                             <input
+                        className="option"
                                 type="radio"
                                 name={`question-${questionIndex}`} // Group radio buttons per question
                                 value={option}
                                 checked={selectedAnswers[questionIndex] === option}
+
                                 onChange={() => handleOptionChange(questionIndex, option, q.correct_answer)}
                             />
                             <label>{option}</label>
