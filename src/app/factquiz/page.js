@@ -6,7 +6,7 @@ export default function Page() {
     const [quiz, setQuiz] = useState([]);
     const [selectedAnswers, setSelectedAnswers] = useState({}); // Stores selected answers
     const [answerStatus, setAnswerStatus] = useState({}); // Stores whether answer is correct or not
-    const [selectedValue, setSelectedValue] = useState('')
+    const [selectedValue, setSelectedValue] = useState('any')
     // Shuffle function to randomize options once
     const shuffleArray = (array) => [...array].sort(() => Math.random() - 0.5);
     useEffect(() => {
@@ -24,8 +24,6 @@ export default function Page() {
             ...selectedAnswers,
             [questionIndex]: selectedOption,
         });
-
-
         setAnswerStatus({
             ...answerStatus,
             [questionIndex]: selectedOption === correctAnswer ? "correct" : "incorrect",
@@ -33,6 +31,17 @@ export default function Page() {
     };
     const filterQuiz = (event) => {
         const selectedDifficulty = event.target.value;
+        if (selectedDifficulty === 'any') {
+            
+            const shuffledQuiz = quizData.map((q) => ({
+                ...q,
+                options: shuffleArray([...q.incorrect_answers, q.correct_answer]),
+            }));
+            setQuiz(shuffledQuiz);
+        setSelectedValue(selectedDifficulty);
+
+            return
+        }
         setSelectedValue(selectedDifficulty);
         const filteredQuiz = quizData.filter((quiz) => quiz.difficulty === selectedDifficulty);
         setQuiz(filteredQuiz.map(q => ({
@@ -48,6 +57,8 @@ export default function Page() {
             <label htmlFor="difficulty">Select Difficulty:</label>
             <br />
             <select onChange={filterQuiz} value={selectedValue} id="difficulty" name="difficulty" >
+                <option value="any">Any</option>
+
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
@@ -69,35 +80,35 @@ export default function Page() {
                         {q.difficulty}
                     </label>
                     {q.options.map((option, i) => (
-    <div
-        key={i}
-        style={{
-            border: selectedAnswers[questionIndex] === option
-                ? answerStatus[questionIndex] === "correct"
-                    ? "2px solid green"
-                    : "2px solid red"
-                : "2px solid grey",
-            padding: "5px",
-            marginBottom: "5px",
-            borderRadius: "5px",
-            cursor: "pointer", // Makes it look clickable
-            display: "flex", 
-            alignItems: "center", 
-            gap: "10px" // Adds spacing between radio and text
-        }}
-        onClick={() => handleOptionChange(questionIndex, option, q.correct_answer)} // ✅ Click anywhere to select
-    >
-        <input
-            className="option"
-            type="radio"
-            name={`question-${questionIndex}`} // Group radio buttons by question
-            value={option}
-            checked={selectedAnswers[questionIndex] === option}
-            onChange={() => handleOptionChange(questionIndex, option, q.correct_answer)}
-        />
-        <label style={{ cursor: "pointer" }}>{option}</label>
-    </div>
-))}
+                        <div
+                            key={i}
+                            style={{
+                                border: selectedAnswers[questionIndex] === option
+                                    ? answerStatus[questionIndex] === "correct"
+                                        ? "2px solid green"
+                                        : "2px solid red"
+                                    : "2px solid grey",
+                                padding: "5px",
+                                marginBottom: "5px",
+                                borderRadius: "5px",
+                                cursor: "pointer", // Makes it look clickable
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "10px" // Adds spacing between radio and text
+                            }}
+                            onClick={() => handleOptionChange(questionIndex, option, q.correct_answer)} // ✅ Click anywhere to select
+                        >
+                            <input
+                                className="option"
+                                type="radio"
+                                name={`question-${questionIndex}`} // Group radio buttons by question
+                                value={option}
+                                checked={selectedAnswers[questionIndex] === option}
+                                onChange={() => handleOptionChange(questionIndex, option, q.correct_answer)}
+                            />
+                            <label style={{ cursor: "pointer" }}>{option}</label>
+                        </div>
+                    ))}
 
                 </div>
             ))}
