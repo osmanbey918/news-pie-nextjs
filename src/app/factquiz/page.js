@@ -7,6 +7,7 @@ export default function Page() {
     const [selectedAnswers, setSelectedAnswers] = useState({}); // Stores selected answers
     const [answerStatus, setAnswerStatus] = useState({}); // Stores whether answer is correct or not
     const [selectedValue, setSelectedValue] = useState('any')
+    const [search, setSearch] = useState([])
     // Shuffle function to randomize options once
     const shuffleArray = (array) => [...array].sort(() => Math.random() - 0.5);
     useEffect(() => {
@@ -29,16 +30,17 @@ export default function Page() {
             [questionIndex]: selectedOption === correctAnswer ? "correct" : "incorrect",
         });
     };
+
     const filterQuiz = (event) => {
         const selectedDifficulty = event.target.value;
         if (selectedDifficulty === 'any') {
-            
+
             const shuffledQuiz = quizData.map((q) => ({
                 ...q,
                 options: shuffleArray([...q.incorrect_answers, q.correct_answer]),
             }));
             setQuiz(shuffledQuiz);
-        setSelectedValue(selectedDifficulty);
+            setSelectedValue(selectedDifficulty);
 
             return
         }
@@ -50,12 +52,28 @@ export default function Page() {
         })));
     };
 
+    const handleSearch = (e) => {
+        let v = e.target.value.toLowerCase();
+        if (v.trim() === "") {
+            setSearch([]); // Clear search results if input is empty
+            return;
+        }
+    
+        const filteredQuestions = quizData
+            .filter(q => q.category.toLowerCase().includes(v))
+            .map(q => q.question);
+    
+        setSearch(filteredQuestions); // Update state once
+    };
+
     return (
         <div>
             <h1>FactQuiz</h1>
             <p>FactQuiz is a quiz app that tests your knowledge of random facts. Are you ready?</p>
             <label htmlFor="difficulty">Select Difficulty:</label>
             <br />
+            <input type="search" onChange={handleSearch} />
+            {search.map((q) => (<h3>{q}</h3>))}
             <select onChange={filterQuiz} value={selectedValue} id="difficulty" name="difficulty" >
                 <option value="any">Any</option>
 
