@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     const $ = cheerio.load(html);
 
     // Example: Scrape news headlines
-    let headlines = [];
+    const headlines = [];
     $('h3').each((index, element) => {
       headlines.push($(element).text().trim());
     });
